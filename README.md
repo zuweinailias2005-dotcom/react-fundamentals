@@ -1,16 +1,48 @@
-# React + Vite
+# React Fundamentals 
+This project was created as a part of my React Fundamentals training using Vite 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Project Setup
 
-Currently, two official plugins are available:
+-Created the project using Vite
+-Installed required pacakges using npm
+-Configured Tailwind Css
+-Configured React Router for page navigation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+# Folder Structure
 
-## React Compiler
+react-fundamentals/
+│── public/
+│── src/
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
+│   └── main.jsx
+│── index.html
+│── package.json
+│── vite.config.js
+│── README.md
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# Installed Packages
 
-## Expanding the ESLint configuration
+-React Router DOM
+-Axios
+-Tailwind CSS (@tailwindcss/vite)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Steps to Run the Project Locally
+
+1. Open the project folder in VS Code.
+2. Open the terminal.
+3. Install the project dependencies:
+npm install
+
+
+4. Start the development server:
+npm run dev
+
+
+5. Open the application in your browser at:
+http://localhost:5174
