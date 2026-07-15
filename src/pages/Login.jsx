@@ -1,14 +1,17 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import { supabase } from "../lib/supabase";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  function handleLogin() {
+  async function handleLogin() {
   if (!email || !password) {
     setError("Please fill in all fields.");
     return;
@@ -24,10 +27,22 @@ function Login() {
     return;
   }
 
-  setError("");
-  alert("Login Successful!");
+setError("");
+
+const { data, error: supabaseError } = await supabase
+  .from("users")
+  .select("*")
+  .eq("email", email)
+  .eq("password", password)
+  .maybeSingle();
+
+if (supabaseError || !data) {
+  setError("Invalid email or password.");
+  return;
 }
 
+navigate("/dashboard");
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
@@ -78,6 +93,13 @@ function Login() {
             Login
           </Button>
         </div>
+
+        <p className="text-center mt-4 text-sm">
+  Don't have an account?{" "}
+  <Link to="/register" className="text-blue-600 font-medium">
+    Register
+  </Link>
+</p>
 
       </div>
     </div>
