@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import { useAuth } from "../context/useAuth";
 import api from "../services/api";
 
 function Login() {
@@ -10,6 +11,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   async function handleLogin() {
   if (!email || !password) {
@@ -35,9 +37,10 @@ function Login() {
       password,
     });
 
-    console.log(response.data);
+   console.log(response.data);
+   login(response.data.user);
+   navigate("/dashboard");
 
-    navigate("/dashboard");
   } catch (error) {
     setError(
       error.response?.data?.message || "Invalid email or password."
