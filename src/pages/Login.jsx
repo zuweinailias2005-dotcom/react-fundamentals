@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import { supabase } from "../lib/supabase";
+import api from "../services/api";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -27,22 +27,23 @@ function Login() {
     return;
   }
 
-setError("");
+  setError("");
 
-const { data, error: supabaseError } = await supabase
-  .from("users")
-  .select("*")
-  .eq("email", email)
-  .eq("password", password)
-  .maybeSingle();
+  try {
+    const response = await api.post("/auth/login", {
+      email,
+      password,
+    });
 
-if (supabaseError || !data) {
-  setError("Invalid email or password.");
-  return;
-}
+    console.log(response.data);
 
-navigate("/dashboard");
+    navigate("/dashboard");
+  } catch (error) {
+    setError(
+      error.response?.data?.message || "Invalid email or password."
+    );
   }
+}
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
@@ -105,5 +106,6 @@ navigate("/dashboard");
     </div>
   );
 }
+
 
 export default Login;

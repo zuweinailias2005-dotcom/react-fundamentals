@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import { supabase } from "../lib/supabase";
+import api from "../services/api";
 
 function Register() {
   const navigate = useNavigate();
@@ -13,43 +13,42 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
-  async function handleRegister() {
-    if (!name || !email || !password) {
-      setError("Please fill in all fields.");
-      return;
-    }
+ async function handleRegister() {
+  if (!name || !email || !password) {
+    setError("Please fill in all fields.");
+    return;
+  }
 
-    if (!email.includes("@")) {
-      setError("Please enter a valid email address.");
-      return;
-    }
+  if (!email.includes("@")) {
+    setError("Please enter a valid email address.");
+    return;
+  }
 
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters.");
-      return;
-    }
+  if (password.length < 6) {
+    setError("Password must be at least 6 characters.");
+    return;
+  }
 
-    setError("");
+  setError("");
 
-    const { error: supabaseError } = await supabase
-      .from("users")
-      .insert([
-        {
-          name,
-          email,
-          password,
-        },
-      ]);
+  try {
+    const response = await api.post("/auth/register", {
+      name,
+      email,
+      password,
+    });
 
-    if (supabaseError) {
-      setError(supabaseError.message);
-      return;
-    }
+    console.log(response.data);
 
     alert("Registration Successful!");
 
     navigate("/login");
+  } catch (error) {
+    setError(
+      error.response?.data?.message || "Registration failed."
+    );
   }
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
