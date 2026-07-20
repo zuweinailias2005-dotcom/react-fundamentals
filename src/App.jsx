@@ -3,6 +3,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import UploadEmployees from "./pages/UploadEmployees";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/upload" element={<UploadEmployees />} />
       </Routes>
     </BrowserRouter>
   );
