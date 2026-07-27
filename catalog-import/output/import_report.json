@@ -1,0 +1,9 @@
+{
+  "missingRequiredFields": [],
+  "missingImageFolders": [],
+  "duplicateBarcodes": [],
+  "unmatchedImages": [],
+  "warnings": [
+    "HEIC images are included as provided without conversion."
+  ]
+}

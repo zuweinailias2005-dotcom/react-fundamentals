@@ -1,0 +1,102 @@
+[
+  {
+    "designNo": "D1001",
+    "brand": "Urban Loom",
+    "productName": "Men's Kurta",
+    "colors": [
+      {
+        "color": "Red",
+        "images": [
+          "D1001\\Red\\IMG_001.HEIC",
+          "D1001\\Red\\IMG_002.jpg",
+          "D1001\\Red\\IMG_003.jpg"
+        ],
+        "variants": [
+          {
+            "barcode": "784512390001",
+            "size": "M",
+            "stock": 10,
+            "price": 1499
+          },
+          {
+            "barcode": "784512390002",
+            "size": "L",
+            "stock": 8,
+            "price": 1499
+          }
+        ]
+      },
+      {
+        "color": "Blue",
+        "images": [
+          "D1001\\Blue\\IMG_001.HEIC",
+          "D1001\\Blue\\IMG_002.jpg"
+        ],
+        "variants": [
+          {
+            "barcode": "784512390003",
+            "size": "M",
+            "stock": 7,
+            "price": 1499
+          },
+          {
+            "barcode": "784512390004",
+            "size": "L",
+            "stock": 5,
+            "price": 1499
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "designNo": "D1002",
+    "brand": "North Thread",
+    "productName": "Cotton Shirt",
+    "colors": [
+      {
+        "color": "Black",
+        "images": [
+          "D1002\\Black\\IMG_001.HEIC",
+          "D1002\\Black\\IMG_002.jpg",
+          "D1002\\Black\\IMG_003.jpg"
+        ],
+        "variants": [
+          {
+            "barcode": "918276450101",
+            "size": "40",
+            "stock": 12,
+            "price": 1299
+          },
+          {
+            "barcode": "918276450102",
+            "size": "42",
+            "stock": 9,
+            "price": 1299
+          }
+        ]
+      },
+      {
+        "color": "White",
+        "images": [
+          "D1002\\White\\IMG_001.HEIC",
+          "D1002\\White\\IMG_002.jpg"
+        ],
+        "variants": [
+          {
+            "barcode": "918276450103",
+            "size": "40",
+            "stock": 6,
+            "price": 1299
+          },
+          {
+            "barcode": "918276450104",
+            "size": "42",
+            "stock": 4,
+            "price": 1299
+          }
+        ]
+      }
+    ]
+  }
+]
