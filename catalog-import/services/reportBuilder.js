@@ -29,7 +29,7 @@ export function buildReport(excelData, imageMap) {
       barcodeSet.add(row.Barcode);
     }
 
-    // Missing Image Folder
+    
     if (
       !imageMap[row["Design No."]] ||
       !imageMap[row["Design No."]][row.Color]
