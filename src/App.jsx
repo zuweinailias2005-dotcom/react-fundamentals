@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CatalogImport from "./pages/CatalogImport";
 import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import Login from "./pages/Login";
@@ -26,6 +27,16 @@ function App() {
         />
         <Route path="/upload" element={<UploadEmployees />} />
         <Route path="/employees" element={<Employees />} />
+
+        <Route 
+        path="/catalog-import"
+        element ={
+          <ProtectedRoute>
+            <CatalogImport/>
+          </ProtectedRoute>
+        }
+        />
+
       </Routes>
     </BrowserRouter>
   );

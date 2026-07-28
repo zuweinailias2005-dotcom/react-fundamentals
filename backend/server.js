@@ -2,6 +2,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 
+import catalogRoutes from "./routes/catalogRoutes.js";
 import employeeRoutes from "./routes/employeeRoutes.js";
 import healthRoutes from "./routes/healthRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/", healthRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/api/employees", employeeRoutes);
+app.use("/api/catalog", catalogRoutes);
 
 const PORT = process.env.PORT || 5000;
 

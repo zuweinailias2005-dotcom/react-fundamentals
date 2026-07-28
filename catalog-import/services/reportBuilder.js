@@ -1,49 +1,65 @@
+import { validateRow } from "./validator.js";
+
 export function buildReport(excelData, imageMap) {
+  console.log("NEW REPORT BUILDER IS RUNNING");
+
   const report = {
-    missingRequiredFields: [],
+    validationErrors: [],
     missingImageFolders: [],
     duplicateBarcodes: [],
-    unmatchedImages: [],
     warnings: [],
   };
 
   const barcodeSet = new Set();
+  const variantSet = new Set();
 
-  for (const row of excelData) {
-   
-    if (
-      !row["Design No."] ||
-      !row.Color ||
-      !row.Barcode
-    ) {
-      report.missingRequiredFields.push({
-        designNo: row["Design No."],
-        barcode: row.Barcode,
+  excelData.forEach((row, index) => {
+    // Validate all required fields
+    const errors = validateRow(row, variantSet);
+
+    if (errors.length > 0) {
+      report.validationErrors.push({
+        row: index + 2, // Excel row number
+        designNo: row["Design No."] || "",
+        barcode: row.Barcode || "",
+        errors,
       });
     }
 
-    // Duplicate Barcode
-    if (barcodeSet.has(row.Barcode)) {
-      report.duplicateBarcodes.push(row.Barcode);
-    } else {
-      barcodeSet.add(row.Barcode);
+    // Duplicate Barcode Check
+    if (row.Barcode) {
+      if (barcodeSet.has(row.Barcode)) {
+        report.duplicateBarcodes.push({
+          row: index + 2,
+          barcode: row.Barcode,
+        });
+      } else {
+        barcodeSet.add(row.Barcode);
+      }
     }
 
-    
+    // Missing Image Folder Check
+    const designNo = row["Design No."];
+    const color = row.Color;
+
     if (
-      !imageMap[row["Design No."]] ||
-      !imageMap[row["Design No."]][row.Color]
+      !imageMap[designNo] ||
+      !imageMap[designNo][color]
     ) {
       report.missingImageFolders.push({
-        designNo: row["Design No."],
-        color: row.Color,
+        row: index + 2,
+        designNo,
+        color,
+        message: `Image folder missing for Design ${designNo}, Color ${color}`
       });
     }
-  }
+  });
 
   report.warnings.push(
     "HEIC images are included as provided without conversion."
   );
+
+  console.log(report);
 
   return report;
 }

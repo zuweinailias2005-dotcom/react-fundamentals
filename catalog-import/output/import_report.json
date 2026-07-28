@@ -1,8 +1,16 @@
 {
-  "missingRequiredFields": [],
+  "validationErrors": [
+    {
+      "row": 2,
+      "designNo": "D1001",
+      "barcode": "784512390001",
+      "errors": [
+        "Brand Name is required."
+      ]
+    }
+  ],
   "missingImageFolders": [],
   "duplicateBarcodes": [],
-  "unmatchedImages": [],
   "warnings": [
     "HEIC images are included as provided without conversion."
   ]

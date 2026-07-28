@@ -6,46 +6,48 @@ import { scanImages } from "./services/imageScanner.js";
 import { buildReport } from "./services/reportBuilder.js";
 import { extractZip } from "./services/zipExtractor.js";
 
-try {
-  const excelData = parseExcel();
-  console.log("Excel Rows:", excelData.length);
+export async function processCatalogImport(excelPath, zipPath) {
+  
+  const excelData = parseExcel(excelPath);
 
-  const extractedFolder = extractZip();
-  console.log("ZIP Extracted Successfully!");
+ 
+  const extractedFolder = extractZip(zipPath);
 
+  
   const imageMap = scanImages(extractedFolder);
 
+ 
   const catalog = buildCatalog(excelData, imageMap);
 
+ 
   const report = buildReport(excelData, imageMap);
 
-  const outputPath = path.join(
+  
+  const outputFolder = path.join(
   process.cwd(),
-  "output",
-  "catalog.json"
+  "..",
+  "catalog-import",
+  "output"
 );
 
-fs.writeFileSync(
-  outputPath,
-  JSON.stringify(catalog, null, 2)
-);
 
-console.log("catalog.json created successfully!");
+fs.mkdirSync(outputFolder, { recursive: true });
 
-const reportPath = path.join(
-  process.cwd(),
-  "output",
-  "import_report.json"
-);
+  
+ fs.writeFileSync(
+    path.join(outputFolder, "catalog.json"),
+    JSON.stringify(catalog, null, 2)
+  );
 
-fs.writeFileSync(
-  reportPath,
-  JSON.stringify(report, null, 2)
-);
+  
+  fs.writeFileSync(
+    path.join(outputFolder, "import_report.json"),
+    JSON.stringify(report, null, 2)
+  ); 
 
-console.log("import_report.json created successfully!");
-
-  console.log(JSON.stringify(catalog, null, 2));
-} catch (error) {
-  console.error(error);
+  
+  return {
+    catalog,
+    report,
+  };
 }
