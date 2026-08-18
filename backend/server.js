@@ -5,6 +5,7 @@ import express from "express";
 import catalogRoutes from "./routes/catalogRoutes.js";
 import employeeRoutes from "./routes/employeeRoutes.js";
 import healthRoutes from "./routes/healthRoutes.js";
+import importResolutionRoutes from "./routes/importResolutionRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
@@ -19,6 +20,10 @@ app.use("/", healthRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/api/employees", employeeRoutes);
 app.use("/api/catalog", catalogRoutes);
+app.use(
+  "/api/internal/import",
+  importResolutionRoutes
+);
 
 const PORT = process.env.PORT || 5000;
 

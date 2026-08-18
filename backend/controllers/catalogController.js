@@ -11,9 +11,12 @@ export async function importCatalog(req, res) {
       });
     }
 
+    const tenantId = "11111111-1111-1111-1111-111111111111";
+
     const result = await processCatalogImportService(
       excelFile.path,
-      imageZip.path
+      imageZip.path,
+      tenantId
     );
 
     res.status(200).json({

@@ -24,3 +24,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Project-specific files
+backend/.env
+backend/temp/
+backend/uploads/
+
+catalog-import/output/

@@ -1,12 +1,15 @@
 import express from "express";
 import multer from "multer";
+
 import { importCatalog } from "../controllers/catalogController.js";
+
 
 const router = express.Router();
 
 const upload = multer({
   dest: "uploads/",
 });
+
 
 router.post(
   "/import",
@@ -16,5 +19,6 @@ router.post(
   ]),
   importCatalog
 );
+
 
 export default router;

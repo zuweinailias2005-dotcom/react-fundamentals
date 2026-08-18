@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import fs from "fs";
 import path from "path";
 import { buildCatalog } from "./services/catalogBuilder.js";
@@ -6,21 +7,21 @@ import { scanImages } from "./services/imageScanner.js";
 import { buildReport } from "./services/reportBuilder.js";
 import { extractZip } from "./services/zipExtractor.js";
 
-export async function processCatalogImport(excelPath, zipPath) {
-  
+export async function processCatalogImport(excelPath, zipPath, tenantId) {
+ const jobId = crypto.randomUUID();
   const excelData = parseExcel(excelPath);
 
- 
   const extractedFolder = extractZip(zipPath);
 
-  
   const imageMap = scanImages(extractedFolder);
 
- 
   const catalog = buildCatalog(excelData, imageMap);
 
- 
-  const report = buildReport(excelData, imageMap);
+  const report = await buildReport(
+    excelData,
+    imageMap,
+    tenantId
+  );
 
   
   const outputFolder = path.join(
